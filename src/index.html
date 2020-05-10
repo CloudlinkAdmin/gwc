@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample For Browser</title>
+		<script type="text/javascript" src="./secrets.js"></script>
+		<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.js"></script>
+		<script type="text/javascript" src="./graph-js-sdk.js"></script>
+		<script type="text/javascript" src="./request.js"></script>
+		<!--<script type="text/javascript" src="./ui.js"></script>-->
+		<script type="text/javascript" src="./main.js"></script>
+		<link rel="stylesheet" type="text/css" href="./main.css" />
+	</head>
+
+	<body style="background: #f3f3f3;">
+		<div display="inline-block">
+			<h2 id='message'>Hello 
+			</h2>
+			<p id='demo'></p>
+		</div>
+		<div class="main">
+			<div id="requests" class="grid">
+				<div id="1" cell="1" class="cell">
+					<span cell="1" class="cellText">Get My Details</span>
+				</div>
+				<div id="2" cell="2" class="cell">
+					<span cell="2" class="cellText">Get My Drive Files</span>
+				</div>
+				<div id="3" cell="3" class="cell">
+					<span cell="3" class="cellText">Get My Mails</span>
+				</div>
+				<div id="4" cell="4" class="cell">
+					<span cell="4" class="cellText">Upload Large File To OneDrive</span>
+					<input id="largeFileUpload" class="largeFileUpload" type="file" onchange="request.uploadLargeFile()" />
+				</div>
+			</div>
+			<div class="outputParent">
+				<div style="margin: 10px; font-weight: bold">Result</div>
+				<div id="output" width="100%" style="margin: 10px;"></div>
+			</div>
+		</div>
+
+<!-- response structure for response at aka.ms/ge-->
+<!--
+<div _ngcontent-c2="" id="response-viewer">
+	<img _ngcontent-c2="" id="responseImg" ng-cloak="" role="img" style="margin-top:10px" tabindex="0" hidden="" name="photo of the signed in user">
+	<div _ngcontent-c2="" id="jsonViewer" role="textbox" tabindex="0" aria-label="The response body returned by Microsoft Graph" class=" ace_editor ace-tm">
+		<textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 14px; width: 6.59781px; left: 0px; top: 0px;" name="The response body returned by Microsoft Graph">
+		</textarea>
+			<div class="ace_gutter">
+				<div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: -4px; height: 150px; width: 33px;">
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div><div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+					<div class="ace_gutter-cell " style="height: 14px;">
+					</div>
+				</div>
+				<div class="ace_gutter-active-line" style="display: none;">
+				</div>
+			</div>
+			<div class="ace_scroller" style="left: 33px; right: 17px; bottom: 0px;">
+				<div class="ace_content" style="margin-top: -4px; width: 1514px; height: 150px; margin-left: 0px;">
+					<div class="ace_layer ace_print-margin-layer">
+						<div class="ace_print-margin" style="left: 531.825px; visibility: hidden;">
+						</div>
+					</div>
+					<div class="ace_layer ace_marker-layer">
+					</div>
+					<div class="ace_layer ace_text-layer" style="padding: 0px 4px;">
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"jobTitle"</span>: null,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"mail"</span>: 
+							<span class="ace_string">"admin@cloudlink.ai"</span>,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"mobilePhone"</span>: null,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"officeLocation"</span>: null,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"preferredLanguage"</span>: 
+							<span class="ace_string">"en-GB"</span>,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"surname"</span>: null,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"userPrincipalName"</span>: 
+							<span class="ace_string">"admin@cloudlink.ai"</span>,
+						</div>
+						<div class="ace_line" style="height:14px">    
+							<span class="ace_variable">"id"</span>: 
+							<span class="ace_string">"c4b7c903-1180-479c-8591-9759ffc979b0"</span>
+						</div>
+						<div class="ace_line" style="height:14px">
+							<span class="ace_paren ace_rparen">}</span>
+						</div>
+					</div>
+					<div class="ace_layer ace_marker-layer">
+					</div>
+					<div class="ace_layer ace_cursor-layer ace_hidden-cursors" style="opacity: 0;">
+						<div class="ace_cursor" style="left: 162.347px; top: -56px; width: 6.59781px; height: 14px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ace_scrollbar ace_scrollbar-v" style="width: 22px; bottom: 0px;">
+			<div class="ace_scrollbar-inner" style="width: 22px; height: 210px;">
+			</div>
+		</div>
+		<div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 22px; left: 33px; right: 17px;">
+			<div class="ace_scrollbar-inner" style="height: 22px; width: 1514px;">
+			</div>
+		</div>
+		<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;">
+			<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;">
+			</div>
+			<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+			</div>
+		</div>
+	</div>
+</div>
+-->
+
+	<script type="text/javascript" src="./utils.js"></script>
+	<script type="text/javascript" src="./ui.js"></script>
+	</body>
+</html>

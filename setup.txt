@@ -1,0 +1,27 @@
+https://github.com/microsoftgraph/msgraph-sdk-javascript/tree/dev/samples/browser
+
+
+
+1:  https://github.com/microsoftgraph/msgraph-sdk-javascript/blob/dev/README.md#1-register-your-application
+
+2:
+    Build and Run the sample
+    Navigate to project home [../../]
+
+    Run npm install and npm run build
+
+    Navigate to browser samples directory [./samples/browser]
+
+    Install the application by npm install.
+
+    Rename the secrets.sample.js file as secrets.js.
+
+    Update your clientId in secret.js file.
+
+    Run npm start to build and start the application.
+
+    Navigate to http://localhost:8080 in your web browser.
+
+    Sign in with your account.
+
+    Click on the Options to view the result.
