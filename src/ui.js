@@ -1,41 +1,130 @@
-
-let globalVariable
-
 let ui = {
 	setDisplayName: (name) => {
-		document.getElementById("displayName").innerHTML = name;
+	  document.getElementById('displayName').innerHTML = name
 	},
-
+  
 	setProfilePicture: (imgBlob) => {
-		document.getElementById("profileImg").setAttribute("src", URL.createObjectURL(imgBlob));
+	  document
+		.getElementById('profileImg')
+		.setAttribute('src', URL.createObjectURL(imgBlob))
 	},
-
+  
 	updateOutput: (res) => {
-		globalVariable = JSON.stringify(res)
-		document.getElementById("output").innerHTML = globalVariable;
-		//return result;
-	},
-};
+		
+		let output = '<pre>'
+		
+			for (var key in res) {
+				if (res.hasOwnProperty(key)) {
+				
+				let arrayCount = Object.keys(res).length;
+				console.log(arrayCount);
+				
+				output += `<span id='item-${key}' style='color: green;'>"${key}"</span>: "${res[key]}", <br />`
+					
+				}
+			}
+		
+		output += '</pre>'
+	  	document.getElementById('output').innerHTML = output
 
-
-
-ui.updateOutput();
-console.log(globalVariable);
-
-
-/* drit i denne delen her, experimentering
-let text = '{"employees":[' +
-'{"@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones": [],"displayName": "Admin Cloudlink","givenName": null,"jobTitle": null,"mail": "admin@cloudlink.ai","mobilePhone": null,"officeLocation": null,"preferredLanguage": "en-GB","surname": null,"userPrincipalName": "admin@cloudlink.ai","id": "c4b7c903-1180-479c-8591-9759ffc979b0" },' +
-'{"firstName":"Anna","lastName":"Smith" },' +
-'{"firstName":"Peter","lastName":"Jones" }]}';
-
-obj = JSON.parse(text);
-document.getElementById("demo").innerHTML =
-obj.employees[1].firstName + " " + obj.employees[1].lastName;
-obj.employees[0]@odata.context + " " + obj.employees[0].businessPhones + " " + obj.employees[0].displayName + " " + obj.employees[0].givenName +" " + obj.employees[0].jobTitle + " " + obj.employees[0].mail + " " + obj.employees[0].mobilePhone + " " + obj.employees[0].officeLocation + " " + obj.employees[0].preferredLanguage + " " + obj.employees[0].surname + " " + obj.employees[0].userPrincipalName + " " + obj.employees[0].id + " ";
-
-{
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones": [],"displayName": "Admin Cloudlink","givenName": null,"jobTitle": null,"mail": "admin@cloudlink.ai","mobilePhone": null,"officeLocation": null,"preferredLanguage": "en-GB","surname": null,"userPrincipalName": "admin@cloudlink.ai","id": "c4b7c903-1180-479c-8591-9759ffc979b0"
+	}
 }
 
+
+
+
+
+
+
+
+
+
+/*
+		var result = parseJSON(res);
+
+		function parseJSON(obj) {
+			var parsedData = '';
+			for(var i in obj) {
+				if (typeof obj[i] == 'object') {
+					parsedData += parseJSON(obj[i]);
+					
+				}else {
+					parsedData += `<span style='color: green;'>"${i}"</span>: "${obj[i]}", <br />`;
+					
+				}//end if
+				//parsedData += '\n';
+			}//end for
+			
+			return parsedData;
+		}//end function
+
+		document.getElementById('output').innerHTML = result
+*/
+
+
+
+/*
+		
+			}
+
+
+
+
+		function parseJSON(obj) {
+			var parsedData = '';
+			for(var i in obj) {
+				if (typeof obj[i] == 'object') {
+					parsedData += parseJSON(obj[i]);
+					
+				}else {
+					parsedData += `<span style='color: green;'>"${i}"</span>: "${obj[i]}", <br />`;
+					
+				}//end if
+				//parsedData += '\n';
+			}//end for
+			
+			return parsedData;
+		}//end function
+
+		document.getElementById('message').innerHTML = output
+		document.getElementById('output').innerHTML = result
+/*		
+
+
+/*
+		let output = '<pre>'
+		
+			for (var key in res) {
+				if (res.hasOwnProperty(key)) {
+				output += `<span style='color: green;'>"${key}"</span>: "${res[key]}", <br />`
+				}
+			}
+		output += '</pre>'
+	  	document.getElementById('output').innerHTML = output
+	  	console.log(res);*/
+/*
+
+
+/*
+		var result = parseJSON(res);
+
+		
+		let arrayCount = Object.keys(res).length;
+		console.log(arrayCount);
+			if (arrayCount>1){
+				//console.log('I found ' + arrayCount + ' objects');
+				/*
+				for(let i=0;i<arrayCount;i++){
+					
+					let output = '<pre>'
+		
+						for (var key in res) {
+							if (res.hasOwnProperty(key)) {
+							output += `<span style='color: green;'>"${key}"</span>: "${res[key]}", <br />`
+							}
+						}
+					output += '</pre>'
+					console.log('Item ' + i + ' processed');
+					console.log(output);
+		
 */
