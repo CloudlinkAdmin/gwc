@@ -26,9 +26,9 @@
 
 .grid {
 	text-align: center;
-	width: 13.99999%;
+	width: 50.0%;
 	height: 250px;
-	min-width: 250px;
+	min-width: 500px;
 	float: left;
 }
 

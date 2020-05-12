@@ -55,7 +55,7 @@ let request = {
 
 	getUserDetails: async () => {
 		try {
-			let res = await client.api("/me").get();
+			let res = await client.api("/users").get();
 			return res;
 		} catch (error) {
 			throw error;
@@ -71,9 +71,9 @@ let request = {
 		}
 	},
 
-	getMyMails: async () => {
+	getMyDetails: async () => {
 		try {
-			let res = await client.api("/me/messages").get();
+			let res = await client.api("/me").get();
 			return res;
 		} catch (error) {
 			throw error;
@@ -92,6 +92,15 @@ let request = {
 			const response = await uploadTask.upload();
 			ui.updateOutput(response);
 			return response;
+		} catch (error) {
+			throw error;
+		}
+	},
+
+	getMyMails: async () => {
+		try {
+			let res = await client.api("/me/messages").get();
+			return res;
 		} catch (error) {
 			throw error;
 		}
